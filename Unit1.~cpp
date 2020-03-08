@@ -13,12 +13,17 @@ int x = -8;
 int y = -8;
 int z = -8;
 int c = -8;
+int player1score = 0;
+int player2score = 0;
+
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
 {
+        ShowMessage("Witaj w grze o ¿ycie! \n \n Twoim celem jest nie daæ zaraziæ siê koronawirusem! \n Lewy gracz steruje klawiszami Z oraz X. \n Prawy gracz steruje strza³kami góra i dó³. \n \n Wa¿na informacja: gdy wirus odbija siê od kolorowych koñców, przyspiesza i zmienia k¹t poruszania sie. \n \n Udanej zabawy!");
 }
 //---------------------------------------------------------------------------
+
 
 void __fastcall TForm1::top1Timer(TObject *Sender)
 {
@@ -73,14 +78,52 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
        if(ball->Top >= tlo->Height-30) y = -y;
 
        //fail
-       if((ball->Left == 0) || (ball->Left >= tlo->Width-25))
+       if((ball->Left <= 0))
        {
                 ballT->Enabled = false;
+                capsule1->Enabled = false;
+                capsule2->Enabled = false;
                 ball->Visible = false;
-                Button1->Caption = "Przegra³es!";
+                Button1->Caption = "Skucha!";
                 Button1->Visible = true;
+                player2score++;
+                score2->Caption =  player2score;
+                x=-8;
+                if(player2score ==3)
+                {
 
+                  Button2->Caption = "Wygrywa gracz prawy!";
+                  Button2->Visible = true;
+                  Button1->Caption = "Again?";
+                 player1score = 0;
+                 player2score = 0;
+                 score1->Caption =  player1score;
+                 score2->Caption =   player2score;
+                }
        }
+       else if(ball->Left >= tlo->Width-15)
+       {
+                ballT->Enabled = false;
+                capsule1->Enabled = false;
+                capsule2->Enabled = false;
+                ball->Visible = false;
+                Button1->Caption = "Skucha!";
+                Button1->Visible = true;
+                player1score++;
+                score1->Caption =  player1score;
+                 if(player1score ==3)
+                {
+
+                  Button2->Caption = "Wygrywa gracz lewy!";
+                  Button2->Visible = true;
+                  Button1->Caption = "Again?";
+                 player1score = 0;
+                 player2score = 0;
+                 score1->Caption =  player1score;
+                 score2->Caption =   player2score;
+                }
+       }
+
        else if ((ball->Top >= p1->Top - ball->Height/2) && (ball->Top + ball->Height <= p1->Top + p1->Height + ball->Height/2) && (ball->Left < p1->Left + p1->Width+5 ) )
         {
                 if((ball->Top >= (p1->Top + p1->Height-57)) && (ball->Top + ball->Height <= p1->Top + p1->Height + ball->Height/2))
@@ -129,7 +172,7 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
                 }
         }
 
-        else if  ((ball->Top >= cap1->Top + ball->Width/2) && (ball->Top + ball->Height <= cap1->Top + cap1->Height+ ball->Width/2 ) && (ball->Left <= cap1->Left + cap1->Width)&& (ball->Left + ball->Width >= cap1->Left + cap1->Width - 10))
+       else if  ((ball->Top >= cap1->Top + ball->Width/2) && (ball->Top + ball->Height <= cap1->Top + cap1->Height+ ball->Width/2 ) && (ball->Left <= cap1->Left + cap1->Width)&& (ball->Left + ball->Width >= cap1->Left + cap1->Width - 10))
         {
                 if(x<0)  x=-x;
         }
@@ -144,9 +187,7 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
         else if ((ball->Top >= cap2->Top + ball->Width/2 ) && (ball->Top + ball->Height <= cap2->Top + cap2->Height+ ball->Width/2) && (ball->Left + ball->Width > cap2->Left) && (ball->Left <= cap2->Left + 10) )
         {
                if(x>0)  x=-x;
-        }
-
-
+        }   
 }
 //---------------------------------------------------------------------------
 
@@ -172,4 +213,63 @@ void __fastcall TForm1::capsule2Timer(TObject *Sender)
       if(cap2->Top + cap2->Height >= tlo->Height) c = -c;
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button1Click(TObject *Sender)
+{
+  p1->Top = 120;
+  p2->Top = 120;
+
+  ball->Left = 560;
+  ball->Top = 400;
+  cap1->Top = 64;
+  cap2->Top = 272;
+  ballT->Enabled = true;
+  capsule1->Enabled = true;
+  capsule2->Enabled = true;
+  ball->Visible = true;
+  Button1->Visible = false;
+  Button2->Visible = false;
+  x=-8;
+    p1->Left = 16;
+    p2->Left = tlo->Width-37;
+    cap1->Left = 300;
+    cap2->Left = tlo->Width-337;
+    Button1->Left = tlo->Width/2 -64;
+    Button2->Left = tlo->Width/2 -64;
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::FormCreate(TObject *Sender)
+{
+    ballT->Enabled = false;
+    capsule1->Enabled = false;
+    capsule2->Enabled = false;
+    score1->Visible = false;
+    score2->Visible = false;
+    line->Visible = false;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button3Click(TObject *Sender)
+{
+    ballT->Enabled = true;
+    capsule1->Enabled = true;
+    capsule2->Enabled = true;
+    score1->Visible = true;
+    score2->Visible = true;
+    line->Visible = true;
+    Label1->Visible = false;
+    Label2->Visible = false;
+    Button3->Visible = false;
+    p1->Left = 16;
+    p2->Left = tlo->Width-37;
+    cap1->Left = 300;
+    cap2->Left = tlo->Width-337;
+    Button1->Left = tlo->Width/2 -64;
+    Button2->Left = tlo->Width/2 -64;
+
+}
+//---------------------------------------------------------------------------
+
 

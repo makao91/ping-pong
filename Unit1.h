@@ -15,7 +15,6 @@ class TForm1 : public TForm
 {
 __published:	// IDE-managed Components
         TImage *tlo;
-        TImage *p1;
         TImage *p2;
         TTimer *top1;
         TTimer *down1;
@@ -24,6 +23,7 @@ __published:	// IDE-managed Components
         TImage *ball;
         TTimer *ballT;
         TButton *Button1;
+        TImage *p1;
         void __fastcall top1Timer(TObject *Sender);
         void __fastcall down1Timer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,

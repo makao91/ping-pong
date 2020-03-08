@@ -79,14 +79,72 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
                 Button1->Visible = true;
 
        }
-       else if ((ball->Top <= (p1->Top + p1->Height + ball->Height/2)) && (ball->Top >= p1->Top - ball->Height/4) && (ball->Left < p1->Left + p1->Width))
+       else if ((ball->Top >= p1->Top - ball->Height/2) && (ball->Top + ball->Height <= p1->Top + p1->Height + ball->Height/2) && (ball->Left < p1->Left + p2->Width+5 ) )
         {
-                x=-x;
+                if((ball->Top >= (p1->Top + p1->Height-57)) && (ball->Top + ball->Height <= p1->Top + p1->Height + ball->Height/2))
+                {
+                  if (x<0)
+                  {
+                        x=-x;
+                        y+=2;
+
+                        if(ballT->Interval>0)
+                        {
+                                ballT->Interval-=2;
+                        }
+                  }
+                }
+                else if((ball->Top >= p1->Top - ball->Height/2) && (ball->Top + ball->Height <= p1->Top + 57))
+                {
+                  if (x<0)
+                  {
+                        x=-x;
+                        y+=2;
+                         if(ballT->Interval>0)
+                        {
+                                ballT->Interval-=2;
+                        }
+                  }
+                }
+                else
+                {
+                        if(x<0) x=-x; y=8;
+                }
         }
-        else if ((ball->Top <= (p2->Top + p2->Height + ball->Height/2)) && (ball->Top >= p2->Top - ball->Height/4) && (ball->Left > p2->Left - p2->Width - 15))
+
+        else if ((ball->Top >= p2->Top - ball->Height/2) && (ball->Top + ball->Height <= p2->Top + p2->Height + ball->Height/2) && (ball->Left + ball->Width >= p2->Left ) )
         {
-                x=-x;
+                if((ball->Top >= (p2->Top + p2->Height-57)) && (ball->Top + ball->Height <= p2->Top + p2->Height + ball->Height/2))
+                {
+                  if (x>0)
+                  {
+                        x=-x;
+                        y+=2;
+                         if(ballT->Interval>0)
+                        {
+                                ballT->Interval-=2;
+                        }
+                  }
+                }
+                else if((ball->Top >= p2->Top - ball->Height/2) && (ball->Top + ball->Height <= p2->Top + 57))
+                {
+                 if (x>0)
+                  {
+                        x=-x;
+                        y+=2;
+                         if(ballT->Interval>0)
+                        {
+                                ballT->Interval-=2;
+                        }
+                  }
+                }
+                else
+                {
+                if(x>0) x=-x; y=8;
+                }
         }
+
 
 }
 //---------------------------------------------------------------------------
+

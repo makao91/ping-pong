@@ -24,6 +24,10 @@ __published:	// IDE-managed Components
         TTimer *ballT;
         TButton *Button1;
         TImage *p1;
+        TImage *cap1;
+        TImage *cap2;
+        TTimer *capsule1;
+        TTimer *capsule2;
         void __fastcall top1Timer(TObject *Sender);
         void __fastcall down1Timer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
@@ -33,6 +37,8 @@ __published:	// IDE-managed Components
         void __fastcall top2Timer(TObject *Sender);
         void __fastcall down2Timer(TObject *Sender);
         void __fastcall ballTTimer(TObject *Sender);
+        void __fastcall capsule1Timer(TObject *Sender);
+        void __fastcall capsule2Timer(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);

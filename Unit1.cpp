@@ -11,6 +11,8 @@ TForm1 *Form1;
 
 int x = -8;
 int y = -8;
+int z = -8;
+int c = -8;
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
@@ -71,7 +73,7 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
        if(ball->Top >= tlo->Height-30) y = -y;
 
        //fail
-       if((ball->Left == 0) || (ball->Left >= tlo->Width-25))
+       if((ball->Left <= 0) || (ball->Left >= tlo->Width-15))
        {
                 ballT->Enabled = false;
                 ball->Visible = false;
@@ -79,19 +81,14 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
                 Button1->Visible = true;
 
        }
-       else if ((ball->Top >= p1->Top - ball->Height/2) && (ball->Top + ball->Height <= p1->Top + p1->Height + ball->Height/2) && (ball->Left < p1->Left + p2->Width+5 ) )
+       else if ((ball->Top >= p1->Top - ball->Height/2) && (ball->Top + ball->Height <= p1->Top + p1->Height + ball->Height/2) && (ball->Left < p1->Left + p1->Width+5 ) )
         {
                 if((ball->Top >= (p1->Top + p1->Height-57)) && (ball->Top + ball->Height <= p1->Top + p1->Height + ball->Height/2))
                 {
                   if (x<0)
                   {
                         x=-x;
-                        y+=2;
-
-                        if(ballT->Interval>0)
-                        {
-                                ballT->Interval-=2;
-                        }
+                        x+=2;
                   }
                 }
                 else if((ball->Top >= p1->Top - ball->Height/2) && (ball->Top + ball->Height <= p1->Top + 57))
@@ -99,16 +96,12 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
                   if (x<0)
                   {
                         x=-x;
-                        y+=2;
-                         if(ballT->Interval>0)
-                        {
-                                ballT->Interval-=2;
-                        }
+                        x+=2;
                   }
                 }
                 else
                 {
-                        if(x<0) x=-x; y=8;
+                        if(x<0) {x=-x; y=8; }
                 }
         }
 
@@ -119,11 +112,7 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
                   if (x>0)
                   {
                         x=-x;
-                        y+=2;
-                         if(ballT->Interval>0)
-                        {
-                                ballT->Interval-=2;
-                        }
+                         x-=2;
                   }
                 }
                 else if((ball->Top >= p2->Top - ball->Height/2) && (ball->Top + ball->Height <= p2->Top + 57))
@@ -131,20 +120,56 @@ void __fastcall TForm1::ballTTimer(TObject *Sender)
                  if (x>0)
                   {
                         x=-x;
-                        y+=2;
-                         if(ballT->Interval>0)
-                        {
-                                ballT->Interval-=2;
-                        }
+                         x-=2;
                   }
                 }
                 else
                 {
-                if(x>0) x=-x; y=8;
+                if(x>0) {x=-x; y=8; }
                 }
         }
 
+       else if  ((ball->Top >= cap1->Top + ball->Width/2) && (ball->Top + ball->Height <= cap1->Top + cap1->Height+ ball->Width/2 ) && (ball->Left <= cap1->Left + cap1->Width)&& (ball->Left + ball->Width >= cap1->Left + cap1->Width - 10))
+        {
+                if(x<0)  x=-x;
+        }
+        else if ((ball->Top >= cap1->Top+ ball->Width/2) && (ball->Top + ball->Height <= cap1->Top + cap1->Height+ ball->Width/2 ) && (ball->Left + ball->Width >= cap1->Left) && (ball->Left <= cap1->Left + 10) )
+        {
+                if(x>0)  x=-x;
+        }
+        else if ((ball->Top >= cap2->Top + ball->Width/2 ) && (ball->Top + ball->Height <= cap2->Top + cap2->Height+ ball->Width/2) && (ball->Left <= cap2->Left + cap2->Width)&& (ball->Left + ball->Width >= cap2->Left + cap1->Width - 10))
+        {
+                if(x<0)  x=-x;
+        }
+        else if ((ball->Top >= cap2->Top + ball->Width/2 ) && (ball->Top + ball->Height <= cap2->Top + cap2->Height+ ball->Width/2) && (ball->Left + ball->Width > cap2->Left) && (ball->Left <= cap2->Left + 10) )
+        {
+               if(x>0)  x=-x;
+        }
 
+
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm1::capsule1Timer(TObject *Sender)
+{
+        cap1->Top += z;
+      if(cap1->Top - 2 <= 0)
+      {
+         z = -z;
+      }
+      if(cap1->Top + cap1->Height + 2 >= tlo->Height)
+      {
+        z = -z;
+      }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::capsule2Timer(TObject *Sender)
+{
+    cap2->Top += c;
+      if(cap2->Top - 2 <= 0) c = -c;
+      if(cap2->Top + cap2->Height >= tlo->Height) c = -c;
 }
 //---------------------------------------------------------------------------
 

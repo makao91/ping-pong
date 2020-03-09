@@ -20,7 +20,7 @@ int player2score = 0;
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
 {
-        ShowMessage("Witaj w grze o ¿ycie! \n \n Twoim celem jest nie daæ zaraziæ siê koronawirusem! \n Lewy gracz steruje klawiszami Z oraz X. \n Prawy gracz steruje strza³kami góra i dó³. \n \n Wa¿na informacja: gdy wirus odbija siê od kolorowych koñców, przyspiesza i zmienia k¹t poruszania sie. \n \n Udanej zabawy!");
+        ShowMessage("Witaj w grze o ¿ycie! \n \n Twoim celem jest nie daæ zaraziæ siê koronawirusem! \n Lewy gracz steruje klawiszami Z oraz X. \n Prawy gracz steruje strza³kami góra i dó³. \n \n Wa¿na informacja: gdy wirus odbija siê od kolorowych koñców, przyspiesza i zmienia k¹t poruszania sie. \n Trzy wirusy wystarcz¹ by ciê zaraziæ! \n \n Udanej zabawy!");
 }
 //---------------------------------------------------------------------------
 
